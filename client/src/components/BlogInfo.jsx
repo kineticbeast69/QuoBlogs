@@ -10,6 +10,7 @@ import { Suspense, useState, useEffect } from "react";
 import LoadingComment from "./loading/loadingComment";
 import Comment from "./Comments";
 import axios from "axios";
+import AIicon from "../assets/images/ai.png";
 export default function BlogInfo() {
   const { blogId } = useParams();
   const [info, setInfo] = useState("");

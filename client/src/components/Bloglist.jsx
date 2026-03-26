@@ -4,11 +4,12 @@ import axios from "axios";
 import { Suspense } from "react";
 import LoadingCard from "./loading/loadingCard";
 import { useForm } from "react-hook-form";
+import { data } from "react-router-dom";
 export default function Bloglist() {
   const [value, setValue] = useState("All");
   const [datas, setDatas] = useState([]);
   const [req, setReq] = useState(false);
-
+  const [message, setMessage] = useState("");
   const blogCategory = [
     "All",
     "technologies",
@@ -35,6 +36,9 @@ export default function Bloglist() {
       );
       // console.log(request.data.blog);
       setDatas(request.data.blog);
+      if (datas.length == 0) {
+        setMessage("No Matching Blog Found.");
+      }
     } catch (error) {
       if (error) {
         return console.error(error.response?.data?.message || error);
@@ -51,6 +55,9 @@ export default function Bloglist() {
       // console.log(response.data);
       setDatas(response.data.blogs);
       // setDatas(datas.filter((data) => data.category === value));
+      if (datas.length === 0) {
+        setMessage("No Blogs Available.");
+      }
     } catch (error) {
       if (error.response) {
         console.log(error.response);
@@ -123,11 +130,13 @@ export default function Bloglist() {
       <Suspense fallback={<LoadingCard />}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-3 mb-24 mx-8 sm:mx-16 xl:mx-40">
           {/* // blog cards components */}
-          {datas
-            .filter((data) => value === "All" || data.category == value)
-            .map((data, index) => (
-              <BlogCard key={index} list={data} />
-            ))}
+          {datas.length === 0 ? (
+            <div className="text-3xl w-full m-auto">{message}</div>
+          ) : (
+            datas
+              .filter((data) => value === "All" || data.category == value)
+              .map((data, index) => <BlogCard key={index} list={data} />)
+          )}
         </div>
       </Suspense>
     </div>

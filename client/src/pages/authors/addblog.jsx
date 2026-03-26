@@ -4,11 +4,14 @@ import Quill from "quill";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import Spinner from "../../components/loading/spinner";
+import { parse } from "marked";
 export default function AddBlogPage() {
   const [img, setImg] = useState("");
   const [err, setErr] = useState("");
-
+  const [title, setTitle] = useState("");
+  const [titleMessage, setTitleMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,6 +27,7 @@ export default function AddBlogPage() {
     }
   }, []);
 
+  // adding blog func
   const addBlog = async (data) => {
     const descriptionRef = quillRef.current?.root.innerHTML; //quill bot refer
     const formData = new FormData();
@@ -55,12 +59,33 @@ export default function AddBlogPage() {
       setErr("");
     } catch (error) {
       if (error.response) {
-        // console.log(error);
+        console.log(error.response?.data);
         setErr(error.response?.data?.message);
       }
     }
   };
 
+  // generating the ai content
+  const generateContent = async () => {
+    if (!title.trim()) return setTitleMessage("Title is required.");
+
+    try {
+      setLoading(true);
+      const request = await axios.post(
+        import.meta.env.VITE_BASE_URL + "author/generate",
+        { prompt: title },
+        { withCredentials: true },
+      );
+      // console.log(request.data.content);
+      setTitleMessage("");
+      quillRef.current.root.innerHTML = parse(request.data.content);
+    } catch (error) {
+      // console.log(error.response.data.message);
+      setTitleMessage(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <main>
       <div className="text-2xl md:text-3xl lg:text-4xl">
@@ -131,9 +156,13 @@ export default function AddBlogPage() {
               required: "Title is required",
               minLength: { value: 5, message: "Minimum 5 characters" },
             })}
+            onChange={(e) => setTitle(e.target.value)}
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+          )}
+          {titleMessage && (
+            <p className="text-red-500 text-sm mt-1">{titleMessage}</p>
           )}
 
           {/* SUBTITLE */}
@@ -158,9 +187,11 @@ export default function AddBlogPage() {
             <div ref={editorRef}></div>
             <button
               type="button"
+              disabled={loading}
+              onClick={() => generateContent()}
               className="absolute bottom-1 right-2 text-xs text-white bg-linear-to-r from-indigo-500 via-purple-500 to-indigo-500 px-4 py-1.5 rounded hover:underline"
             >
-              Generate with AI
+              {loading ? <Spinner /> : "Generate with AI"}
             </button>
           </div>
 

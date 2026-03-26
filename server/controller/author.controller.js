@@ -5,6 +5,7 @@ import Imageclient from "../config/imagekit.js";
 import Blog from "../models/blogs.model.js";
 import Comments from "../models/comments.model.js";
 import { toFile } from "@imagekit/nodejs";
+import GeminiMain from "../config/gemini.js";
 
 const AddAuthor = async (req, res) => {
   const { name, email, bio, link, language, experience, confirm, topics } =
@@ -191,6 +192,24 @@ const BlogComments = async (req, res) => {
       .json({ status: false, message: "Internal server error Author API_6" });
   }
 };
+
+// genereate blog description and subtitle
+const GenerateContent = async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    const content = await GeminiMain(
+      prompt +
+        "Act as a professional content creator. Generate a detailed blog post about the topic. Return only the main blog content formatted in simple HTML using <h3>, <p>, <strong>, and <ul> tags so it can be easily pasted into a rich text editor. Ensure the content is well-structured, informative, and engaging with clear headings, readable paragraphs, highlighted key points, and bullet lists where appropriate. Do not include JSON, markdown, or any extra text—return only clean HTML blog content",
+    );
+    return res.status(200).json({ status: true, content });
+  } catch (error) {
+    console.log("Auhtor error Api_7", error);
+    return res
+      .status(500)
+      .json({ status: false, message: "Internal Server Error Author API_7" });
+  }
+};
+
 export {
   AddAuthor,
   AddBlog,
@@ -198,4 +217,5 @@ export {
   Dashboard,
   AuthorCommentedBlog,
   BlogComments,
+  GenerateContent,
 };
