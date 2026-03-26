@@ -19,8 +19,6 @@ QuoBlog is a modern blogging platform built with **React 19** and **TailwindCSS*
 
 ---
 
----
-
 ## 🛠️ Tech Stack
 
 * React 19

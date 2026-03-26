@@ -23,6 +23,7 @@ export default function Bloglist() {
     formState: { errors },
   } = useForm();
 
+  // query fuunction
   const querySubmit = async (data) => {
     const { query } = data;
     setReq(true);
