@@ -4,7 +4,6 @@ import axios from "axios";
 import { Suspense } from "react";
 import LoadingCard from "./loading/loadingCard";
 import { useForm } from "react-hook-form";
-import { data } from "react-router-dom";
 export default function Bloglist() {
   const [value, setValue] = useState("All");
   const [datas, setDatas] = useState([]);
