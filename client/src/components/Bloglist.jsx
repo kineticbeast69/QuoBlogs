@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
 import axios from "axios";
 import { Suspense } from "react";
-import LoadingCards from "./loading/LoadingCards";
+import LoadingCards from "./loading/LoadingCard";
 import { useForm } from "react-hook-form";
 export default function Bloglist() {
   const [value, setValue] = useState("All");
