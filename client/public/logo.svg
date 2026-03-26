@@ -1,0 +1,38 @@
+<svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Soft Aesthetic Gradient -->
+    <linearGradient id="softGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5b4fc"/>
+      <stop offset="50%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded Diamond Frame -->
+  <path
+    d="M70 14
+       Q74 14 78 18
+       L122 62
+       Q126 66 126 70
+       Q126 74 122 78
+       L78 122
+       Q74 126 70 126
+       Q66 126 62 122
+       L18 78
+       Q14 74 14 70
+       Q14 66 18 62
+       L62 18
+       Q66 14 70 14Z"
+    fill="none"
+    stroke="url(#softGrad)"
+    stroke-width="2.5"
+  />
+
+  <!-- Blog / Editorial Lines -->
+  <line x1="46" y1="54" x2="94" y2="54" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+  <line x1="46" y1="70" x2="86" y2="70" stroke="#86efac" stroke-width="2" stroke-linecap="round"/>
+  <line x1="46" y1="86" x2="78" y2="86" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- AI Accent Dot -->
+  <circle cx="94" cy="86" r="3.5" fill="url(#softGrad)"/>
+</svg>
