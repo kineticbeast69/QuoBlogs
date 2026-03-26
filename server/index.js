@@ -26,7 +26,9 @@ app.use(requestIp.mw()); //request-ip middleware
 app.use(express.json()); //json middleware
 app.use(express.urlencoded({ extended: true })); //parser middleware
 app.use(cookieParser()); //cookie middleware
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL })); //cors middleware
+app.use(
+  cors({ credentials: true, origin: "https://quoblogs-client.onrender.com" }),
+); //cors middleware
 
 // connecting db and starting server
 await dbConnect();
