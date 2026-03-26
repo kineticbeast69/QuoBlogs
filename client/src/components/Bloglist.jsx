@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import BlogCard from "./BlogCard";
 import axios from "axios";
 import { Suspense } from "react";
-import LoadingCard from "./loading/loadingCard";
+import LoadingCards from "./loading/LoadingCards";
 import { useForm } from "react-hook-form";
 export default function Bloglist() {
   const [value, setValue] = useState("All");
@@ -127,7 +127,7 @@ export default function Bloglist() {
           );
         })}
       </div>
-      <Suspense fallback={<LoadingCard />}>
+      <Suspense fallback={<LoadingCards />}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-3 mb-24 mx-8 sm:mx-16 xl:mx-40">
           {/* // blog cards components */}
           {datas.length === 0 ? (

@@ -1,4 +1,4 @@
-export default function LoadingCard() {
+export default function LoadingCards() {
   return (
     // this is the ghost loading of blog cards
     <aside className="w-full flex justify-center my-10">
