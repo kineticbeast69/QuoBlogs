@@ -2,6 +2,14 @@
 
 QuoBlog AI Writer is an intelligent blogging assistant that automatically generates **high-quality blog descriptions** using AI. It helps writers quickly create engaging content, summaries, and descriptions with minimal effort.
 
+### Admin Details
+ * Email = admin1@test.com
+ * ID = AUL1234567QUO
+
+
+### Author Details
+ * Email = tony@starkinnovates.com
+ * ID = AUL9016587QUO
 ---
 
 ## ✨ Features
