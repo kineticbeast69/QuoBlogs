@@ -26,17 +26,13 @@ app.use(requestIp.mw()); //request-ip middleware
 app.use(express.json()); //json middleware
 app.use(express.urlencoded({ extended: true })); //parser middleware
 app.use(cookieParser()); //cookie middleware
-app.use(
-  cors({ credentials: true, origin: "https://quoblogs-client.onrender.com" }),
-); //cors middleware
+app.use(cors({ credentials: true, origin: "http://localhost:5173" })); //cors middleware
 
 // connecting db and starting server
 await dbConnect();
 app.listen(process.env.PORT || 3000, (err) => {
   if (err) throw err;
-  console.log(
-    `Server Start Succesfully 🛜🛜🛜  http://localhost:${process.env.PORT}/`,
-  );
+  console.log(`Server Start Succesfully 🛜🛜🛜`);
 });
 
 // subscribe email route

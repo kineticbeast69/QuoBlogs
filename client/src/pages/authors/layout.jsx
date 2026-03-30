@@ -18,7 +18,7 @@ export default function AuthorLayout() {
       if (localStorage.getItem("role") !== "author") navigate("/");
     } catch (error) {
       if (error.response) {
-        // console.log(error.response);
+        console.log(error.response);
         navigate("/");
       }
     }

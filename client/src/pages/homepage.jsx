@@ -20,7 +20,9 @@ export default function HomePage() {
       localStorage.setItem("verified", true);
     } catch (error) {
       if (error.response) {
-        // console.log(error.response);
+        localStorage.removeItem("role");
+        localStorage.removeItem("verified");
+        console.log(error.response);
       }
     }
   };
