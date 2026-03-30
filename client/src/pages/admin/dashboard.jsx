@@ -15,6 +15,7 @@ export default function Dashboard() {
     try {
       const response = await axios.get(
         import.meta.env.VITE_BASE_URL + "admin/dashboard",
+        { withCredentials: true },
       );
       // console.log(response);
       setDatas(response.data?.info);
