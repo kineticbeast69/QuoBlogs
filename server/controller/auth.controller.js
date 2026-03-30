@@ -135,11 +135,14 @@ const AuthUser = async (req, res) => {
 // logout controller
 const Logout = async (req, res) => {
   try {
+    const isProduction = process.env.NODE_COOKIE_ENV === "production";
+
     res.clearCookie("token", {
       httpOnly: true,
-      sameSite: "strict",
-      secure: false,
+      sameSite: isProduction ? "none" : "strict", // ✅ matches login
+      secure: isProduction, // ✅ matches login
     });
+
     return res
       .status(200)
       .json({ status: true, message: "Logout successfully." });
