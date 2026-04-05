@@ -7,6 +7,7 @@ export default function AuthorForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   let timer = useRef(null);
@@ -30,6 +31,7 @@ export default function AuthorForm() {
           autoClose: 5000,
           theme: "dark",
         });
+        reset();
       } catch (error) {
         toast.warn(error.response?.data?.message || "Something went wrong", {
           position: "top-right",

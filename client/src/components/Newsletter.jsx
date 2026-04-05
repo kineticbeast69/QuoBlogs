@@ -7,6 +7,7 @@ export default function Newsletter() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -33,6 +34,7 @@ export default function Newsletter() {
           autoClose: 4000,
           theme: "dark",
         });
+        reset();
       } catch (error) {
         if (error) {
           // console.log(error.response?.data?.message || error);

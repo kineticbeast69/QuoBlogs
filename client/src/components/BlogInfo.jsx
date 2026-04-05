@@ -8,21 +8,25 @@ import {
 import { useParams } from "react-router-dom";
 import { Suspense, useState, useEffect } from "react";
 import LoadingComment from "./loading/loadingComment";
+import LoadingPage from "./loading/LoadingPage";
 import Comment from "./Comments";
 import axios from "axios";
 export default function BlogInfo() {
   const { blogId } = useParams();
   const [info, setInfo] = useState("");
   const [author, setAuthor] = useState("");
+  const [loading, setLoading] = useState(false);
   const [req, setReq] = useState(false);
   const blogInfo = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         import.meta.env.VITE_BASE_URL + `quoblogs/blog-info/${blogId}`,
       );
       // console.log(response.data);
       setInfo(response.data.blog);
       setAuthor(response.data.author);
+      setLoading(false);
     } catch (error) {
       if (error.response) {
         console.log(error.response);
@@ -63,7 +67,9 @@ export default function BlogInfo() {
   useEffect(() => {
     blogInfo();
   }, [blogId, req]);
-  return (
+  return loading ? (
+    <LoadingPage />
+  ) : (
     <div>
       <div className="text-center mt-10 text-gray-600 text-wrap">
         <p className="text-blue-600 py-4 font-medium">

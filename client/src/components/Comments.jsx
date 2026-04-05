@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
+import LoadingComment from "./loading/loadingComment";
 import { toast } from "react-toastify";
 export default function Comment({ blogID }) {
   const [add, setAdd] = useState(false);
   const [lists, setLists] = useState([]);
   const [req, setReq] = useState(false);
   const [length, setLength] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -41,6 +43,7 @@ export default function Comment({ blogID }) {
   // get comments
   const blogComment = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         import.meta.env.VITE_BASE_URL + `quoblogs/blog-comments/${blogID}`,
       );
@@ -48,6 +51,7 @@ export default function Comment({ blogID }) {
       console.log(response.data);
       setLists(response.data.comments);
       setLength(response.data.length);
+      setLoading(false);
     } catch (error) {
       console.log(error.response);
     }
@@ -84,7 +88,9 @@ export default function Comment({ blogID }) {
     blogComment();
   }, [req]);
 
-  return (
+  return loading ? (
+    <LoadingComment />
+  ) : (
     <section className="bg-gray-100">
       <p className="mb-4 border-b border-gray-300">Comments ({length})</p>
 

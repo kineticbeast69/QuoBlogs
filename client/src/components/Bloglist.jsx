@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 export default function Bloglist() {
   const [value, setValue] = useState("All");
   const [datas, setDatas] = useState([]);
+  const [loading, setloading] = useState(false);
   const [req, setReq] = useState(false);
   const [message, setMessage] = useState("");
   const blogCategory = [
@@ -49,6 +50,7 @@ export default function Bloglist() {
   };
   const blogList = async () => {
     try {
+      setloading(true);
       const response = await axios.get(
         import.meta.env.VITE_BASE_URL + "quoblogs/blogs",
       );
@@ -58,6 +60,7 @@ export default function Bloglist() {
       if (datas.length === 0) {
         setMessage("No Blogs Available.");
       }
+      setloading(false);
     } catch (error) {
       if (error.response) {
         console.log(error.response);
@@ -127,7 +130,9 @@ export default function Bloglist() {
           );
         })}
       </div>
-      <Suspense fallback={<LoadingCards />}>
+      {loading ? (
+        <LoadingCards />
+      ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-3 mb-24 mx-8 sm:mx-16 xl:mx-40">
           {/* // blog cards components */}
           {datas.length === 0 ? (
@@ -138,7 +143,7 @@ export default function Bloglist() {
               .map((data, index) => <BlogCard key={index} list={data} />)
           )}
         </div>
-      </Suspense>
+      )}
     </div>
   );
 }
