@@ -17,7 +17,7 @@ export default function LoginPage() {
               <p className="font-light text-base">
                 Enter your credentials to access the panel
               </p>
-              <p className="text-sm text-red-500 flex items-center gap-1">
+              <p className="text-sm text-red-500 flex text-center items-center gap-1">
                 For Admin & Author credentials visit{" "}
                 <Link
                   to="https://github.com/kineticbeast69/QuoBlogs"
