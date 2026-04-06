@@ -17,6 +17,17 @@ export default function LoginPage() {
               <p className="font-light text-base">
                 Enter your credentials to access the panel
               </p>
+              <p className="text-sm text-red-500 flex items-center gap-1">
+                For Admin & Author credentials visit{" "}
+                <Link
+                  to="https://github.com/kineticbeast69/QuoBlogs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-500 underline underline-offset-2 hover:text-indigo-700 transition-colors duration-200 font-medium"
+                >
+                  Github ↗
+                </Link>
+              </p>
             </h1>
           </div>
         </div>
